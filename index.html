@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Get-a-GIF!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+          margin: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="header row d-flex flex-column pl-4">
+        <h1 class="mx-5">Get-a-GIF!</h1>
+        <p class="mx-5"><em>Enter a search phrase, hit "Go get GIFs", receive 10 new GIFs! Easy and Fun!</em></p>
+    </div>
+    <div class="row pl-5" id="button-display"></div>
+    <div class="row d-flex flex-column justify-content-center">
+        <div class="col-8 d-flex flex-column" id="gif-display">
+
+        </div>
+        <div class="col-4 offset-8">
+            <form id="search-form">
+                <label for="gif-search"><strong>What do you want to see?</strong></label>
+                <input type="text" id="gif-search" /><br>
+
+                <input id="add-gif" type="submit" value="Go get GIFs">
+            </form>
+        </div>
+    </div>
+  
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var topics = ["Batman", "Superman", "Wonder Woman", "Spider Man", "Thor", "The Hulk", "Surprised"];
+
+            function makeButtons() {
+                $("#button-display").empty();
+
+                for (var i = 0; i < topics.length; i++) {
+                    var btn = $("<button>");
+                    btn.addClass("movie-btn btn btn-primary");
+                    btn.attr("search-term", topics[i]);
+                    btn.text(topics[i]);
+                    $("#button-display").append(btn);
+                }
+            };
+
+
+
+            makeButtons();
+
+        });
+    
+    </script>
+</body>
+</html>

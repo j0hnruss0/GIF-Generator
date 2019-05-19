@@ -1,2 +1,4 @@
 # GIF-Generator
-Finds Superhero GIFs
+Finds GIfs of any topic
+
+Early development
