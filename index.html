@@ -20,6 +20,7 @@
           display: inline-block;
         }
 
+    /* Media queries to handle mobile and smaller screens*/
         @media screen and (max-width: 950px) {
 
             .content-boxes {
@@ -80,7 +81,10 @@
         
         // Function for getting the GIFs. Uses the Giphy Public API with a search endpoint
 
-            function fetchVids() {
+            function fetchVids(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
 
                 var newVid = $(this).attr("search-term");
                 var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tgMB21BCA8F7OUHAPIYi2sXrnWvssI82&q=" + newVid + "&limit=10&offset=0&lang=en" 
@@ -121,20 +125,20 @@
         // "starting" the GIF. The user can also click on the GIF to change the src back 
         // to the static image, or "turn off" the GIF.
         
-            $(document).on("touchstart click", ".swap-pic", function(event) {
+            $(document).on("click", ".swap-pic", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                
+
                 $(this).attr("turned-on", $(this).attr("src"));
                 $(this).attr("src", $(this).attr("alt"));
                 $(this).addClass("swap-gif");
                 $(this).removeClass("swap-pic");
             });
 
-            $(document).on("touchstart click", ".swap-gif", function(event) {
+            $(document).on("click", ".swap-gif", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                
+            
                 $(this).attr("src", $(this).attr("turned-on"));
                 $(this).addClass("swap-pic");
                 $(this).removeClass("swap-gif");
@@ -158,7 +162,7 @@
         // This jQuery event listener gives each new button created by makeButtons() 
         // functionality just like the buttons shown by default via the topics array
 
-            $("#add-gif").on("touchstart click", function(event) {
+            $("#add-gif").on("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
 
@@ -173,7 +177,7 @@
         // The one below lets the users generate GIFs by clicking or touching a button 
         // that corresponds to each labelled button near the top of the page 
 
-            $(document).on("touchstart click", ".movie-btn", fetchVids);
+            $(document).on("click", ".movie-btn", fetchVids);
 
             makeButtons();
 
