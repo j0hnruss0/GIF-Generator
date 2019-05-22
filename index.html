@@ -121,7 +121,7 @@
         // "starting" the GIF. The user can also click on the GIF to change the src back 
         // to the static image, or "turn off" the GIF.
         
-            $(document).on("mousedown touchstart", ".swap-pic", function(event) {
+            $(document).on("touchstart click", ".swap-pic", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 
@@ -131,7 +131,7 @@
                 $(this).removeClass("swap-pic");
             });
 
-            $(document).on("mousedown touchstart", ".swap-gif", function(event) {
+            $(document).on("touchstart click", ".swap-gif", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
                 
@@ -158,7 +158,7 @@
         // This jQuery event listener gives each new button created by makeButtons() 
         // functionality just like the buttons shown by default via the topics array
 
-            $("#add-gif").on("mousedown touchstart", function(event) {
+            $("#add-gif").on("touchstart click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
 
@@ -173,7 +173,7 @@
         // The one below lets the users generate GIFs by clicking or touching a button 
         // that corresponds to each labelled button near the top of the page 
 
-            $(document).on("mousedown touchstart", ".movie-btn", fetchVids);
+            $(document).on("touchstart click", ".movie-btn", fetchVids);
 
             makeButtons();
 

@@ -1,4 +1,4 @@
 # GIF-Generator
 Finds GIfs of any topic
 
-Project Complete. Only CSS design choices left to be implimented
+Project Complete. CSS design choices left to be implimented. Mobile bugs to be fixed
