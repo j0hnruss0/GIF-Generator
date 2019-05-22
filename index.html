@@ -14,6 +14,14 @@
         input {
           margin: 10px;
         }
+
+        .gif-div,
+        .content-boxes {
+          display: inline-block;
+        }
+
+
+
     </style>
 
 </head>
@@ -23,11 +31,11 @@
         <p class="mx-5"><em>Enter a search phrase, hit "Go get GIFs", receive 10 new GIFs! Easy and Fun!</em></p>
     </div>
     <div class="row pl-5" id="button-display"></div>
-    <div class="row d-flex flex-column justify-content-center">
-        <div class="col-8 d-flex flex-column" id="gif-display">
+    <div class="row justify-content-center">
+        <div class="col-8 content-boxes" id="gif-display">
 
         </div>
-        <div class="col-4 offset-8">
+        <div class="col-3 content-boxes" id="search-display">
             <form id="search-form">
                 <label for="gif-search"><strong>What do you want to see?</strong></label>
                 <input type="text" id="gif-search" /><br>
@@ -44,6 +52,55 @@
 
             var topics = ["Batman", "Superman", "Wonder Woman", "Spider Man", "Thor", "The Hulk", "Surprised"];
 
+            function fetchVids() {
+
+                var newVid = $(this).attr("search-term");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=tgMB21BCA8F7OUHAPIYi2sXrnWvssI82&q=" + newVid + "&limit=10&offset=0&lang=en" 
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET",
+                    headers: {
+                        "Accept": "image/*"
+                    }
+                }).then(function(response) {
+                    console.log(response);
+                    for (var j = 0; j < response.data.length; j++) {
+                        var gifDiv = $("<div class='gif-div'>");
+                        var gifRating = response.data[j].rating;
+                        var rateText = $("<p>").text("Rating: " + gifRating);
+                        gifDiv.append(rateText);
+                        var gifURL = response.data[j].images.fixed_height.url;
+                        var stopURL = response.data[j].images.fixed_height_still.url;
+                        var addGif = $("<img>").attr({
+                            src: stopURL,
+                            class: "swap-pic",
+                            alt: gifURL
+                        });
+                        gifDiv.append(addGif);
+                        $("#gif-display").prepend(gifDiv);
+                        console.log(response);
+                        
+                    }
+                
+                })
+
+
+            };
+
+            $(document).on("click", ".swap-pic", function() {
+                $(this).attr("turned-on", $(this).attr("src"));
+                $(this).attr("src", $(this).attr("alt"));
+                $(this).addClass("swap-gif");
+                $(this).removeClass("swap-pic");
+            });
+
+            $(document).on("click", ".swap-gif", function() {
+                $(this).attr("src", $(this).attr("turned-on"));
+                $(this).addClass("swap-pic");
+                $(this).removeClass("swap-gif");
+            });
+
             function makeButtons() {
                 $("#button-display").empty();
 
@@ -56,7 +113,16 @@
                 }
             };
 
+            $("#add-gif").on("click", function(event) {
+                event.preventDefault();
 
+                var btnMaker = $("#gif-search").val().trim();
+                topics.push(btnMaker);
+                makeButtons();
+
+            });
+
+            $(document).on("click", ".movie-btn", fetchVids);
 
             makeButtons();
 

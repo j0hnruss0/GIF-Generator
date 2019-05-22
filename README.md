@@ -1,4 +1,4 @@
 # GIF-Generator
 Finds GIfs of any topic
 
-Early development
+Project Complete. Will be adding more CSS styles, mobile reactivity soon
