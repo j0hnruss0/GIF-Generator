@@ -121,14 +121,20 @@
         // "starting" the GIF. The user can also click on the GIF to change the src back 
         // to the static image, or "turn off" the GIF.
         
-            $(document).on("click touchstart", ".swap-pic", function() {
+            $(document).on("click touchstart", ".swap-pic", function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+                
                 $(this).attr("turned-on", $(this).attr("src"));
                 $(this).attr("src", $(this).attr("alt"));
                 $(this).addClass("swap-gif");
                 $(this).removeClass("swap-pic");
             });
 
-            $(document).on("click touchstart", ".swap-gif", function() {
+            $(document).on("click touchstart", ".swap-gif", function(event) {
+                event.stopPropagation();
+                event.preventDefault();
+                
                 $(this).attr("src", $(this).attr("turned-on"));
                 $(this).addClass("swap-pic");
                 $(this).removeClass("swap-gif");
@@ -154,6 +160,7 @@
 
             $("#add-gif").on("click touchstart", function(event) {
                 event.preventDefault();
+                event.stopPropagation();
 
                 var btnMaker = $("#gif-search").val().trim();
                 topics.push(btnMaker);
